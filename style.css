@@ -1,0 +1,60 @@
+body {
+  background-color: #c4c4c4;
+  font-family: Tahoma, Geneva, sans-serif;
+}
+
+#buttonWrapper {
+  width: 100%;
+  height: 50px;
+}
+
+#adminbutton {
+  margin: 10px 10px 0 0;
+  float: right;
+}
+
+#please {
+  margin-top: 7rem;
+  text-align: center;
+  font-size: 100px;
+}
+
+#cardlogo {
+  width: auto;
+  height: 200px;
+  display: block;
+  margin-top: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* adminlogin */
+
+#loginWrapper {
+  margin-top: 100px;
+  display: grid;
+  place-items: center;
+}
+
+#loginBox {
+  padding: 40px 50px 20px 50px;
+  text-align: center;
+  border: 1px solid black;
+}
+
+input {
+  height: 30px;
+  width: auto;
+  margin-top: 10px;
+}
+
+#submitButton {
+  height: 40px;
+  width: 100px;
+  margin-top: 30px;
+}
+
+label {
+  display: inline-block;
+  margin-top: 20px;
+}
