@@ -18,17 +18,46 @@ if ($connect->connect_errno!=0)
   <?php
   if (isset($_COOKIE["idQuery"]))
   {
+      $nowStamp = time();
       $idQuery = $_COOKIE["idQuery"];
       $sql = "SELECT * FROM students WHERE BINARY id LIKE $idQuery";
       if ($result = @$connect-> query($sql))
       {
         while($row = $result-> fetch_assoc())
         {
+          $sid = $row['sid'];
           $name = $row['name'];
           setcookie('scanned', $name);
         }
-        //$sql = "UPDATE students SET presence = 1 WHERE id =" . $idQuery;
-        //$result = @$connect-> query($sql);
+        $sql = "SHOW TABLES FROM ".$database;
+        $result = @$connect-> query($sql);
+        $highestCheck = 0;
+        while ($row = mysqli_fetch_row($result)) {
+          if (strspn($row[0],"lesson") == 6)
+          {
+            $tableCheck = $row[0];
+            $tableCheck = substr($tableCheck,6);
+            if ($tableCheck > $highestCheck)
+            {
+              $highestCheck = $tableCheck;
+            }
+          }
+        }
+        if (isset($highestCheck) && isset($sid))
+        {
+          $hc180 = $highestCheck + 180;
+          $hc900 = $highestCheck + 900;
+          if ($nowStamp <= $hc180)
+          {
+            $sql = "UPDATE lesson".$highestCheck." SET status = 1 WHERE sid =".$sid;
+            $result = @$connect-> query($sql);
+          }
+          elseif ($nowStamp > $hc180 && $nowStamp <= $hc900)
+          {
+            $sql = "UPDATE lesson".$highestCheck." SET status = 2 WHERE sid =".$sid;
+            $result = @$connect-> query($sql);
+          }
+        }
       }
       if (!isset($name))
       {
@@ -51,13 +80,13 @@ if (document.cookie.match(/^(.*;)?\s*scanned\s*=\s*[^;]+(.*)?$/))
 {
   if (getCookieValue('scanned') != 0)
   {
-    document.body.style.backgroundColor = "green";
+    document.body.style.backgroundColor = "#20ff35";
     document.getElementById("please").innerHTML = getCookieValue('scanned').replace("%20", " ");
     setTimeout(function(){document.getElementById("please").innerHTML = "Put your card"}, 2000);
   }
   else
   {
-    document.body.style.backgroundColor = "red";
+    document.body.style.backgroundColor = "#ff2020";
     document.getElementById("please").innerHTML = "Card unrecognized";
     setTimeout(function(){document.getElementById("please").innerHTML = "Put your card"}, 2000);
   }

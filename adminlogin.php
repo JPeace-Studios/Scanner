@@ -23,9 +23,9 @@ if ((isset($_SESSION['logged'])) && ($_SESSION['logged']==true))
     <form id="loginBox" method="post" action="login.php">
       Log in to adminstrator panel<br>
       <label for="login">Login:</label><br>
-      <input type="text" id="login" name="login" oninput="lockButton()"><br>
+      <input type="text" id="login" class="normalInput" name="login" oninput="lockButton()"><br>
       <label for="password">Password:</label><br>
-      <input type="password" id="password" name="password" oninput="lockButton()"><br>
+      <input type="password" id="password" class="normalInput" name="password" oninput="lockButton()"><br>
       <input type="submit" id="submitButton" value="Log In">
       <?php
       if(isset($_SESSION['loginError']))

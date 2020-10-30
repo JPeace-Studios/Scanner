@@ -26,10 +26,12 @@ else {
       unset($_SESSION['loginError']);
       $_SESSION['logged'] = true;
       header('Location: adminpanel.php');
+      exit();
     }
     else {
       $_SESSION['loginError'] = true;
       header('Location: adminlogin.php');
+      exit();
     }
   }
 }

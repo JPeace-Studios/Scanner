@@ -21,7 +21,7 @@ if (!isset($_SESSION['logged']))
   </div>
   <div id="loginWrapper">
     Admin Panel
-    <button onclick="location.replace('student.php')">Add new student</button>
+    <button onclick="location.replace('addingstudent.php')">Add new student</button>
     <button onclick="location.replace('addinglesson.php')">Add new lesson</button>
     <?php
     require_once "connect.php";
@@ -42,9 +42,15 @@ if (!isset($_SESSION['logged']))
         echo "<tr><td>No.</td><td>ID</td><td>Name</td></tr>";
         while($row = $result-> fetch_assoc())
         {
-          echo "<tr><td>".$row['sid']."</td><td>".$row['id']."</td><td>".$row['name']."</td><td></tr>";
+          echo "<tr><td>".$row['sid']."</td><td>".$row['id']."</td><td>".$row['name']."</td><td>";
+          $aid = $row['sid'];
+          echo "<form action='editstudent.php' method='post'>";
+          echo "<input type='hidden' name='edit' value='$aid'>";
+          echo "<input type='submit' class='actionStudent editStudent' value=''></form></td><td>";
+          echo "<form action='removestudent.php' method='post'>";
+          echo "<input type='hidden' name='delete' value='$aid'>";
+          echo "<input type='submit' class='actionStudent removeStudent' value=''></form></td></tr>";
         }
-
       }
       echo "</table>";
     }

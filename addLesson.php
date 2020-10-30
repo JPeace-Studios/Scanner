@@ -18,19 +18,11 @@ else {
   {
     $date = $_POST['ldate'];
     $time = $_POST['ltime'];
+    $lessonStamp = strtotime($date.' '.$time);
 
     $sql = "SHOW TABLES FROM ".$database;
     if ($result = @$connect-> query($sql))
     {
-      $lessons = array();
-      while($row = $result-> fetch_assoc())
-      {
-        if (strpos($row['Tables_in_'.$database], "lesson") !== false)
-        {
-          array_push($lessons, $row['Tables_in_'.$database]);
-        }
-      }
-      $lessonNumber = count($lessons) + 1;
       $sql = "select count(1) FROM students";
       $result = mysqli_query($connect, $sql);
       $row = mysqli_fetch_array($result);
@@ -38,30 +30,33 @@ else {
       if ($numberOfStudents > 0)
       {
         while (True) {
-          $tableCheck = mysqli_query($connect, "SELECT 1 FROM lesson".$lessonNumber." LIMIT 1");
+          $tableCheck = mysqli_query($connect, "SELECT 1 FROM lesson".$lessonStamp." LIMIT 1");
           if ($tableCheck !== false)
           {
-            $lessonNumber += 1;
+            $_SESSION['lessonTaken'] = true;
+            header('Location: addinglesson.php');
+            exit();
           }
           else
           {
             break;
           }
         }
-        $sql = "CREATE TABLE lesson".$lessonNumber." (sid INT NOT NULL AUTO_INCREMENT,
-        presence BIT,
+
+        $sql = "CREATE TABLE lesson".$lessonStamp." (sid INT NOT NULL AUTO_INCREMENT,
+        status INT,
         PRIMARY KEY (sid)
         );";
         $result = mysqli_query($connect, $sql);
         for ($x = 1; $x <= $numberOfStudents; $x++)
         {
-          $sql = "INSERT INTO lesson".$lessonNumber." (sid, presence) VALUES (".$x.", 0)";
+          $sql = "INSERT INTO lesson".$lessonStamp." (sid, status) VALUES (".$x.", 0)";
           $result = mysqli_query($connect, $sql);
         }
+      }
       }
     }
   }
   header('Location: adminpanel.php');
-  echo $date . " " . $time;
-}
+  exit();
 ?>

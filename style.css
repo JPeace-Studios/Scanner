@@ -42,7 +42,7 @@ body {
   border: 1px solid black;
 }
 
-input {
+.normalInput {
   height: 30px;
   width: auto;
   margin-top: 10px;
@@ -57,4 +57,45 @@ input {
 label {
   display: inline-block;
   margin-top: 20px;
+}
+
+#idInput {
+  float: right;
+}
+
+
+/* admin panel */
+
+.actionStudent
+{
+  width: auto;
+  height: auto;
+  border: none;
+  background: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.editStudent
+{
+  background-image: url('edit.svg');
+}
+.removeStudent
+{
+background-image: url("remove.svg");
+}
+
+.actionStudent:hover
+{
+cursor: pointer;
+}
+
+/* Remove arrows from number input field */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
 }
