@@ -26,7 +26,7 @@ if (!isset($_SESSION['logged']))
       <input id="nameInput" class="normalInput" name="name" oninput="lockButton()"><br>
       <label>ID:</label>
       <input type="number" id="idInput" class="normalInput" name="id" oninput="lockButton()"><br>
-      <input id="submitStudent" type="submit" class="normalInput" value="Add new student">
+      <input id="submitButton" type="submit" value="Add new student">
       <?php
       if(isset($_SESSION['idTaken']))
       {
@@ -43,11 +43,13 @@ if (!isset($_SESSION['logged']))
     var idValue = document.forms["loginBox"]["idInput"].value;
     if (nameValue == null || nameValue == "" || idValue == null || idValue == "")
     {
-      document.getElementById("submitStudent").disabled = true;
+      document.getElementById("submitButton").disabled = true;
+      document.getElementById("submitButton").style.cursor = 'not-allowed';
     }
     else
     {
-      document.getElementById("submitStudent").disabled = false;
+      document.getElementById("submitButton").disabled = false;
+      document.getElementById("submitButton").style.cursor = 'pointer';
     }
   }
   lockButton();

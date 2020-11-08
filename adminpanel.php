@@ -21,8 +21,8 @@ if (!isset($_SESSION['logged']))
   </div>
   <div id="loginWrapper">
     Admin Panel
-    <button onclick="location.replace('addingstudent.php')">Add new student</button>
-    <button onclick="location.replace('addinglesson.php')">Add new lesson</button>
+    <button id="panelButton" onclick="location.replace('addingstudent.php')">Add new student</button>
+    <button id="panelButton" onclick="location.replace('addinglesson.php')">Add new lesson</button>
     <?php
     require_once "connect.php";
 
@@ -38,7 +38,7 @@ if (!isset($_SESSION['logged']))
       if ($result = @$connect-> query($sql))
       {
         echo "<style> td {padding: 10px; } </style>";
-        echo '<table style="text-align: center;">';
+        echo "<table class='nicelook'>";
         echo "<tr><td>No.</td><td>ID</td><td>Name</td></tr>";
         while($row = $result-> fetch_assoc())
         {

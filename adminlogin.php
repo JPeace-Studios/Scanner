@@ -31,6 +31,12 @@ if ((isset($_SESSION['logged'])) && ($_SESSION['logged']==true))
       if(isset($_SESSION['loginError']))
       {
         echo '<div style="margin-top: 20px; padding: 20px 0 20px 0; border: 1px solid red; border-radius: 5px; background-color: #ffb3b3">Incorrect login or password</div>';
+        ?>
+        <script type="text/javascript">
+          document.body.style.backgroundImage = "linear-gradient(to bottom right, #4ddbff 20%, #ff2020 90%)";
+          document.getElementById("adminbutton").style.borderColor = "#ff2020"
+        </script>
+        <?php
       }
       unset($_SESSION['loginError']);
       ?>
@@ -44,10 +50,12 @@ if ((isset($_SESSION['logged'])) && ($_SESSION['logged']==true))
     if (loginValue == null || loginValue == "" || passwordValue == null || passwordValue == "")
     {
       document.getElementById("submitButton").disabled = true;
+      document.getElementById("submitButton").style.cursor = 'not-allowed';
     }
     else
     {
       document.getElementById("submitButton").disabled = false;
+      document.getElementById("submitButton").style.cursor = 'pointer';
     }
   }
   lockButton();
