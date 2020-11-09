@@ -7,6 +7,7 @@
 <link rel="icon" href="#">
 <?php
 require_once "connect.php";
+require_once "activelesson.php";
 $connect = @new mysqli($host, $userDB, $passwordDB, $database);
 if ($connect->connect_errno!=0)
 {
@@ -29,20 +30,7 @@ if ($connect->connect_errno!=0)
           $name = $row['name'];
           setcookie('scanned', $name);
         }
-        $sql = "SHOW TABLES FROM ".$database;
-        $result = @$connect-> query($sql);
-        $highestCheck = 0;
-        while ($row = mysqli_fetch_row($result)) {
-          if (strspn($row[0],"lesson") == 6)
-          {
-            $tableCheck = $row[0];
-            $tableCheck = substr($tableCheck,6);
-            if ($tableCheck > $highestCheck)
-            {
-              $highestCheck = $tableCheck;
-            }
-          }
-        }
+        $highestCheck = activelesson();
         if (isset($highestCheck) && isset($sid))
         {
           $hc180 = $highestCheck + 180;
@@ -90,7 +78,7 @@ if (document.cookie.match(/^(.*;)?\s*scanned\s*=\s*[^;]+(.*)?$/))
   {
     document.body.style.backgroundImage = "linear-gradient(to bottom right, #4ddbff 20%, #ff2020 90%)";
     document.body.style.backgroundColor = "#ff2020";
-    document.getElementById("adminbutton").style.borderColor = "#ff2020"
+    document.getElementById("adminbutton").style.borderColor = "#ff2020";
     document.getElementById("please").innerHTML = "Card unrecognized";
     setTimeout(function(){document.getElementById("please").innerHTML = "Put your card"}, 2000);
     setTimeout(function(){document.getElementById("adminbutton").style.borderColor = "#70db70"}, 1800);
