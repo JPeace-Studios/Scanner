@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 23 Paź 2020, 12:09
+-- Czas generowania: 09 Lis 2020, 23:01
 -- Wersja serwera: 10.4.11-MariaDB
 -- Wersja PHP: 7.4.4
 
@@ -43,147 +43,78 @@ INSERT INTO `account` (`id`, `login`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `lesson2`
+-- Struktura tabeli dla tabeli `lesson126000`
 --
 
-CREATE TABLE `lesson2` (
+CREATE TABLE `lesson126000` (
   `sid` int(11) NOT NULL,
-  `presence` bit(1) DEFAULT NULL
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Zrzut danych tabeli `lesson2`
+-- Zrzut danych tabeli `lesson126000`
 --
 
-INSERT INTO `lesson2` (`sid`, `presence`) VALUES
-(1, b'0'),
-(2, b'0');
+INSERT INTO `lesson126000` (`sid`, `status`) VALUES
+(1, 0),
+(2, 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `lesson3`
+-- Struktura tabeli dla tabeli `lesson1601892600`
 --
 
-CREATE TABLE `lesson3` (
-  `vfdvf` int(11) NOT NULL
+CREATE TABLE `lesson1601892600` (
+  `sid` int(11) NOT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `lesson1601892600`
+--
+
+INSERT INTO `lesson1601892600` (`sid`, `status`) VALUES
+(1, 1),
+(2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `lesson4`
+-- Struktura tabeli dla tabeli `lesson1604933280`
 --
 
-CREATE TABLE `lesson4` (
+CREATE TABLE `lesson1604933280` (
   `sid` int(11) NOT NULL,
-  `presence` bit(1) DEFAULT NULL
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Zrzut danych tabeli `lesson4`
+-- Zrzut danych tabeli `lesson1604933280`
 --
 
-INSERT INTO `lesson4` (`sid`, `presence`) VALUES
-(1, b'0'),
-(2, b'0');
+INSERT INTO `lesson1604933280` (`sid`, `status`) VALUES
+(1, 0),
+(2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `lesson5`
+-- Struktura tabeli dla tabeli `lesson1620186900`
 --
 
-CREATE TABLE `lesson5` (
+CREATE TABLE `lesson1620186900` (
   `sid` int(11) NOT NULL,
-  `presence` bit(1) DEFAULT NULL
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Zrzut danych tabeli `lesson5`
+-- Zrzut danych tabeli `lesson1620186900`
 --
 
-INSERT INTO `lesson5` (`sid`, `presence`) VALUES
-(1, b'0'),
-(2, b'0');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `lesson6`
---
-
-CREATE TABLE `lesson6` (
-  `sid` int(11) NOT NULL,
-  `presence` bit(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `lesson6`
---
-
-INSERT INTO `lesson6` (`sid`, `presence`) VALUES
-(1, b'0'),
-(2, b'0');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `lesson7`
---
-
-CREATE TABLE `lesson7` (
-  `sid` int(11) NOT NULL,
-  `presence` bit(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `lesson7`
---
-
-INSERT INTO `lesson7` (`sid`, `presence`) VALUES
-(1, b'0'),
-(2, b'0');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `lesson8`
---
-
-CREATE TABLE `lesson8` (
-  `sid` int(11) NOT NULL,
-  `presence` bit(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `lesson8`
---
-
-INSERT INTO `lesson8` (`sid`, `presence`) VALUES
-(1, b'0'),
-(2, b'0');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `lesson9`
---
-
-CREATE TABLE `lesson9` (
-  `sid` int(11) NOT NULL,
-  `presence` bit(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `lesson9`
---
-
-INSERT INTO `lesson9` (`sid`, `presence`) VALUES
-(1, b'0'),
-(2, b'0'),
-(3, b'0'),
-(4, b'0');
+INSERT INTO `lesson1620186900` (`sid`, `status`) VALUES
+(1, 0),
+(2, 0);
 
 -- --------------------------------------------------------
 
@@ -202,10 +133,8 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`sid`, `id`, `name`) VALUES
-(1, 1234567890, 'Jonny Bed'),
-(2, 3336669990, 'Ted Kaczynsky'),
-(3, 496334419, 'Jan Pawel'),
-(4, 487231571, 'TED');
+(1, 1234567891, 'Ted'),
+(2, 9876543210, 'Jimmy');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -218,45 +147,27 @@ ALTER TABLE `account`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `lesson2`
+-- Indeksy dla tabeli `lesson126000`
 --
-ALTER TABLE `lesson2`
+ALTER TABLE `lesson126000`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indeksy dla tabeli `lesson4`
+-- Indeksy dla tabeli `lesson1601892600`
 --
-ALTER TABLE `lesson4`
+ALTER TABLE `lesson1601892600`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indeksy dla tabeli `lesson5`
+-- Indeksy dla tabeli `lesson1604933280`
 --
-ALTER TABLE `lesson5`
+ALTER TABLE `lesson1604933280`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indeksy dla tabeli `lesson6`
+-- Indeksy dla tabeli `lesson1620186900`
 --
-ALTER TABLE `lesson6`
-  ADD PRIMARY KEY (`sid`);
-
---
--- Indeksy dla tabeli `lesson7`
---
-ALTER TABLE `lesson7`
-  ADD PRIMARY KEY (`sid`);
-
---
--- Indeksy dla tabeli `lesson8`
---
-ALTER TABLE `lesson8`
-  ADD PRIMARY KEY (`sid`);
-
---
--- Indeksy dla tabeli `lesson9`
---
-ALTER TABLE `lesson9`
+ALTER TABLE `lesson1620186900`
   ADD PRIMARY KEY (`sid`);
 
 --
@@ -276,52 +187,34 @@ ALTER TABLE `account`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT dla tabeli `lesson2`
+-- AUTO_INCREMENT dla tabeli `lesson126000`
 --
-ALTER TABLE `lesson2`
+ALTER TABLE `lesson126000`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT dla tabeli `lesson4`
+-- AUTO_INCREMENT dla tabeli `lesson1601892600`
 --
-ALTER TABLE `lesson4`
+ALTER TABLE `lesson1601892600`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT dla tabeli `lesson5`
+-- AUTO_INCREMENT dla tabeli `lesson1604933280`
 --
-ALTER TABLE `lesson5`
+ALTER TABLE `lesson1604933280`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT dla tabeli `lesson6`
+-- AUTO_INCREMENT dla tabeli `lesson1620186900`
 --
-ALTER TABLE `lesson6`
+ALTER TABLE `lesson1620186900`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT dla tabeli `lesson7`
---
-ALTER TABLE `lesson7`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT dla tabeli `lesson8`
---
-ALTER TABLE `lesson8`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT dla tabeli `lesson9`
---
-ALTER TABLE `lesson9`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `students`
 --
 ALTER TABLE `students`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
