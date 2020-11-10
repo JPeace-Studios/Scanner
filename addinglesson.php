@@ -26,7 +26,7 @@ if (!isset($_SESSION['logged']))
       <input type="date" class="normalInput" name="ldate"><br>
       <label>Set time:</label>
       <input type="time" class="normalInput" name="ltime"><br>
-      <input type="submit" class="normalInput" value="Add new lesson">
+      <input type="submit" id="panelButton" value="Add new lesson">
       <?php
       if(isset($_SESSION['lessonTaken']))
       {
