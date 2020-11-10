@@ -1,8 +1,8 @@
 body {
-  height: 100vh;
   background-color: #999; /* if you do not use gradient in browser */
   background-image: linear-gradient(to bottom right, #70db70 20%, #0066ff 90%);
   background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: Tahoma, Geneva, sans-serif;
   cursor: default;
 }
@@ -35,7 +35,7 @@ body {
 
 #cardlogo {
   width: auto;
-  height: 50%;
+  height: 450px;
   display: block;
   margin-top: 2%;
   margin-left: auto;
@@ -63,6 +63,7 @@ body {
   border: 2px solid black;
   background: none;
   margin-top: 10px;
+  cursor: text;
 }
 
 .normalInput:focus {
@@ -101,6 +102,15 @@ label {
   border: 2px solid black;
   text-align: center;
   width: 450px;
+}
+
+.nicelook2
+{
+  margin-top: 25px;
+  border: 2px solid black;
+  text-align: center;
+  padding: 5px;
+  width: auto;
 }
 
 #panelButton {

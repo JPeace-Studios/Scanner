@@ -54,7 +54,7 @@ if ($connect->connect_errno!=0)
       echo "<br><label>ID:</label>";
       echo "<input type='number' id='idInput' class='normalInput' name='id' value='$id' oninput='lockButton()'><br>";
       ?>
-      <input id="submitStudent" type="submit" class="normalInput" value="Add new student">
+      <input id="panelButton" type="submit" value="Add new student">
       <?php
       if(isset($_SESSION['idTaken']))
       {
