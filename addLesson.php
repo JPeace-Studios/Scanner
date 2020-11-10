@@ -48,9 +48,27 @@ else {
         PRIMARY KEY (sid)
         );";
         $result = mysqli_query($connect, $sql);
+        $xi = 0;
         for ($x = 1; $x <= $numberOfStudents; $x++)
         {
-          $sql = "INSERT INTO lesson".$lessonStamp." (sid, status) VALUES (".$x.", 0)";
+          $xi += 1;
+          while (True)
+          {
+            $sql = "SELECT EXISTS(SELECT * FROM students WHERE sid=$xi)";
+            if ($result = @$connect-> query($sql))
+            {
+              $row = mysqli_fetch_row($result);
+              if ($row[0] == 0)
+              {
+                $xi += 1;
+              }
+              else
+              {
+                break;
+              }
+            }
+          }
+          $sql = "INSERT INTO lesson".$lessonStamp." (sid, status) VALUES (".$xi.", 0)";
           $result = mysqli_query($connect, $sql);
         }
       }

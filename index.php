@@ -33,17 +33,25 @@ if ($connect->connect_errno!=0)
         $highestCheck = activelesson();
         if (isset($highestCheck) && isset($sid))
         {
-          $hc180 = $highestCheck + 180;
-          $hc900 = $highestCheck + 900;
-          if ($nowStamp <= $hc180)
+          $sql = "SELECT status FROM lesson".$highestCheck." WHERE sid =".$sid;
+          if ($result = @$connect-> query($sql))
           {
-            $sql = "UPDATE lesson".$highestCheck." SET status = 1 WHERE sid =".$sid;
-            $result = @$connect-> query($sql);
-          }
-          elseif ($nowStamp > $hc180 && $nowStamp <= $hc900)
-          {
-            $sql = "UPDATE lesson".$highestCheck." SET status = 2 WHERE sid =".$sid;
-            $result = @$connect-> query($sql);
+            $row = mysqli_fetch_row($result);
+            if ($row[0] == 0)
+            {
+              $hc180 = $highestCheck + 180;
+              $hc900 = $highestCheck + 900;
+              if ($nowStamp <= $hc180)
+              {
+                $sql = "UPDATE lesson".$highestCheck." SET status = 1 WHERE sid =".$sid;
+                $result = @$connect-> query($sql);
+              }
+              elseif ($nowStamp > $hc180 && $nowStamp <= $hc900)
+              {
+                $sql = "UPDATE lesson".$highestCheck." SET status = 2 WHERE sid =".$sid;
+                $result = @$connect-> query($sql);
+              }
+            }
           }
         }
       }
