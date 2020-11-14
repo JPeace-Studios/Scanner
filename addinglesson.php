@@ -13,7 +13,7 @@ if (!isset($_SESSION['logged']))
 <meta charset="utf-8">
 <title>Scanner - Add lesson</title>
 <link rel="stylesheet" href="style.css">
-<link rel="icon" href="#">
+<link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
 </head>
 <body>
   <div id="buttonWrapper">
@@ -23,10 +23,10 @@ if (!isset($_SESSION['logged']))
     <form id="loginBox" method="post" action="addLesson.php">
       Add new lesson<br>
       <label>Set date:</label>
-      <input type="date" class="normalInput" name="ldate"><br>
+      <input type="date" id="ldate" class="normalInput" name="ldate" oninput="lockButton()"><br>
       <label>Set time:</label>
-      <input type="time" class="normalInput" name="ltime"><br>
-      <input type="submit" id="panelButton" value="Add new lesson">
+      <input type="time" id="ltime" class="normalInput" name="ltime" oninput="lockButton()"><br>
+      <input type="submit" id="submitButton" value="Add new lesson">
       <?php
       if(isset($_SESSION['lessonTaken']))
       {
@@ -36,6 +36,23 @@ if (!isset($_SESSION['logged']))
       ?>
     </form>
   </div>
-
+  <script type="text/javascript">
+  function lockButton()
+  {
+    var dateValue = document.forms["loginBox"]["ldate"].value;
+    var timeValue = document.forms["loginBox"]["ltime"].value;
+    if (dateValue == null || dateValue == "" || timeValue == null || timeValue == "")
+    {
+      document.getElementById("submitButton").disabled = true;
+      document.getElementById("submitButton").style.cursor = 'not-allowed';
+    }
+    else
+    {
+      document.getElementById("submitButton").disabled = false;
+      document.getElementById("submitButton").style.cursor = 'pointer';
+    }
+  }
+  lockButton();
+  </script>
 </body>
 </html>

@@ -57,6 +57,14 @@ body {
   border: 2px solid black;
 }
 
+#statusBox
+{
+  margin-top: 50px;
+  padding: 40px 50px 20px 50px;
+  text-align: center;
+  border: 2px solid black;
+}
+
 .normalInput {
   height: 30px;
   width: auto;
@@ -71,7 +79,7 @@ body {
 }
 
 #submitButton {
-  height: 40px;
+  height: 30px;
   width: auto;
   background: none;
   border: 2px solid black;
@@ -104,6 +112,16 @@ label {
   width: 450px;
 }
 
+.nicelook td, .nicelook2 td, .nicelook3 td
+{
+  padding: 10px;
+}
+
+.nicelook th, .nicelook2 th, .nicelook3 th
+{
+  font-weight: normal;
+}
+
 .nicelook2
 {
   margin-top: 25px;
@@ -111,6 +129,15 @@ label {
   text-align: center;
   padding: 5px;
   width: auto;
+}
+
+.nicelook3
+{
+  text-align: center;
+  padding: 5px;
+  width: auto;
+  display: flex;
+  justify-content: center;
 }
 
 #panelButton {
@@ -128,28 +155,46 @@ label {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-.actionStudent
+.actionButton
 {
   width: auto;
   height: auto;
+  float: left;
   border: none;
   background: transparent;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-.editStudent
+.actionButton:hover
+{
+cursor: pointer;
+}
+
+.lessonButtonCell
+{
+  display: table-cell;
+}
+
+.editButton
 {
   background-image: url('edit.svg');
 }
-.removeStudent
+
+.removeButton
 {
 background-image: url("remove.svg");
 }
 
-.actionStudent:hover
+.editButtonLesson
 {
-cursor: pointer;
+padding-left: 20%;
+}
+
+.removeButtonLesson
+{
+float: right;
+padding-right: 20%;
 }
 
 /* Remove arrows from number input field */

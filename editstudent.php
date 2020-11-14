@@ -22,7 +22,7 @@ if ($connect->connect_errno!=0)
 <meta charset="utf-8">
 <title>Scanner - Edit student</title>
 <link rel="stylesheet" href="style.css">
-<link rel="icon" href="#">
+<link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
 </head>
 <body>
   <div id="buttonWrapper">
@@ -54,7 +54,7 @@ if ($connect->connect_errno!=0)
       echo "<br><label>ID:</label>";
       echo "<input type='number' id='idInput' class='normalInput' name='id' value='$id' oninput='lockButton()'><br>";
       ?>
-      <input id="panelButton" type="submit" value="Add new student">
+      <input id="submitButton" type="submit" value="Save changes">
       <?php
       if(isset($_SESSION['idTaken']))
       {
@@ -71,11 +71,13 @@ if ($connect->connect_errno!=0)
     var idValue = document.forms["loginBox"]["idInput"].value;
     if (nameValue == null || nameValue == "" || idValue == null || idValue == "")
     {
-      document.getElementById("submitStudent").disabled = true;
+      document.getElementById("submitButton").disabled = true;
+      document.getElementById("submitButton").style.cursor = 'not-allowed';
     }
     else
     {
-      document.getElementById("submitStudent").disabled = false;
+      document.getElementById("submitButton").disabled = false;
+      document.getElementById("submitButton").style.cursor = 'pointer';
     }
   }
   lockButton();

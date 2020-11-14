@@ -13,7 +13,7 @@ if ((isset($_SESSION['logged'])) && ($_SESSION['logged']==true))
 <meta charset="utf-8">
 <title>Scanner - Log in to admin panel</title>
 <link rel="stylesheet" href="style.css">
-<link rel="icon" href="#">
+<link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
 </head>
 <body>
   <div id="buttonWrapper">

@@ -13,7 +13,7 @@ if (!isset($_SESSION['logged']))
 <meta charset="utf-8">
 <title>Scanner - Add student</title>
 <link rel="stylesheet" href="style.css">
-<link rel="icon" href="#">
+<link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
 </head>
 <body>
   <div id="buttonWrapper">

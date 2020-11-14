@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Scanner - Home</title>
 <link rel="stylesheet" href="style.css">
-<link rel="icon" href="#">
+<link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
 <?php
 require_once "connect.php";
 require_once "activelesson.php";

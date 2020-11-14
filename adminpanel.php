@@ -13,7 +13,7 @@ if (!isset($_SESSION['logged']))
 <meta charset="utf-8">
 <title>Scanner - Admin panel</title>
 <link rel="stylesheet" href="style.css">
-<link rel="icon" href="#">
+<link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
 </head>
 <body>
   <div id="buttonWrapper">
@@ -42,7 +42,6 @@ if (!isset($_SESSION['logged']))
       $sql = "SELECT * FROM students";
       if ($result = @$connect-> query($sql))
       {
-        echo "<style> td {padding: 10px;} th {font-weight: normal;}</style>";
         echo "<table class='nicelook'>";
         echo "<tr><td>No.</td><td>ID</td><td>Name</td><td>Daily attendance</td><td>Monthly attendance</td><td>Semester attendance</td></tr>";
 
@@ -52,10 +51,10 @@ if (!isset($_SESSION['logged']))
           echo "<tr><td>".$row['sid']."</td><td>".$row['id']."</td><td>".$row['name']."</td><td>".daily($aid)."</td><td>".monthly($aid)."</td><td>".semester($aid)."</td><td>";
           echo "<form action='editstudent.php' method='post'>";
           echo "<input type='hidden' name='edit' value='$aid'>";
-          echo "<input type='submit' class='actionStudent editStudent' value=''></form></td><td>";
+          echo "<input type='submit' class='actionButton editButton' value=''></form></td><td>";
           echo "<form action='removestudent.php' method='post'>";
           echo "<input type='hidden' name='delete' value='$aid'>";
-          echo "<input type='submit' class='actionStudent removeStudent' value=''></form></td></tr>";
+          echo "<input type='submit' class='actionButton removeButton' value=''></form></td></tr>";
         }
         echo "</table>";
       }
@@ -77,18 +76,29 @@ if (!isset($_SESSION['logged']))
         $sql = "SELECT * FROM ".$lessons[$i];
         if ($result = @$connect-> query($sql))
         {
-          echo "<table style='text-align: center; padding: 30px'>";
-          echo "<th colspan='3'>".date('d/m/Y H:i', substr($lessons[$i], 6))."</th>";
+          echo "<table class='nicelook2' style='text-align: center; padding: 30px'>";
+          echo "<tr><th colspan='3'>".date('d/m/Y H:i', substr($lessons[$i], 6))."</th></tr>";
+          echo "<tr><td colspan='3' class='lessonButtonCell'>";
+          echo "<form action='editlesson.php' class='editButtonLesson' method='post'>";
+          echo "<input type='hidden' name='edit' value='$lessons[$i]'>";
+          echo "<input type='submit' class='actionButton editButton' value=''></form>";
+          echo "<form action='removelesson.php' class='removeButtonLesson' method='post'>";
+          echo "<input type='hidden' name='delete' value='$lessons[$i]'>";
+          echo "<input type='submit' class='actionButton removeButton' value=''></form></td></tr>";
           echo "<tr><td>No.</td><td>Name</td><td>Status</td></tr>";
           while ($row = mysqli_fetch_assoc($result))
           {
             echo "<tr><td>".$row['sid']."</td><td>";
             $sql = "SELECT name FROM students WHERE sid=".$row['sid'];
-            if ($resultName = @$connect-> query($sql))
+            if ($resultName = $connect-> query($sql))
             {
-              while ($rowName = mysqli_fetch_assoc($resultName))
+              $rowName = mysqli_fetch_assoc($resultName);
+              if ($rowName == null)
               {
-              echo $rowName['name']."</td><td>";
+                echo "deleted student</td><td>";
+              }
+              else {
+                echo $rowName['name']."</td><td>";
               }
             }
             if (substr($lessons[$i],6) > $lessonTimeAfter)
