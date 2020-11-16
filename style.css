@@ -150,6 +150,12 @@ label {
   display: block;
 }
 
+#nostudents
+{
+  margin: 25px 0 25px 0;
+  font-size: 1.5rem;
+}
+
 #panelButton {
   height: 30px;
   width: auto;

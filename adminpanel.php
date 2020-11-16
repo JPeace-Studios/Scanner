@@ -39,24 +39,36 @@ if (!isset($_SESSION['logged']))
     {
       $nowStamp = time();
       $lessonTimeAfter = $nowStamp + 2700;
-      $sql = "SELECT * FROM students";
+      $sql = "SELECT COUNT(sid) FROM students";
       if ($result = @$connect-> query($sql))
       {
-        echo "<button id='panelButton' onclick='buttonclick(-1);'>Show/Hide students table</button><div id='-1' class='hideOff' style='margin-bottom: 5px'><table class='nicelook'>";
-        echo "<tr><td>No.</td><td>ID</td><td>Name</td><td>Daily attendance</td><td>Monthly attendance</td><td>Semester attendance</td></tr>";
-
-        while($row = $result-> fetch_assoc())
+        $row = $result-> fetch_row();
+        if ($row[0] == "0")
         {
-          $aid = $row['sid'];
-          echo "<tr><td>".$row['sid']."</td><td>".$row['id']."</td><td>".$row['name']."</td><td>".daily($aid)."</td><td>".monthly($aid)."</td><td>".semester($aid)."</td><td>";
-          echo "<form action='editstudent.php' method='post'>";
-          echo "<input type='hidden' name='edit' value='$aid'>";
-          echo "<input type='submit' class='actionButton editButton' value=''></form></td><td>";
-          echo "<form action='removestudent.php' method='post'>";
-          echo "<input type='hidden' name='delete' value='$aid'>";
-          echo "<input type='submit' class='actionButton removeButton' value=''></form></td></tr>";
+          echo "<div id='nostudents'>There is no students</div>";
         }
-        echo "</table></div>";
+        else
+        {
+          $sql = "SELECT * FROM students";
+          if ($result = @$connect-> query($sql))
+          {
+            echo "<button id='panelButton' onclick='buttonclick(-1);'>Show/Hide students table</button><div id='-1' class='hideOff' style='margin-bottom: 5px'><table class='nicelook'>";
+            echo "<tr><td>No.</td><td>ID</td><td>Name</td><td>Daily attendance</td><td>Monthly attendance</td><td>Semester attendance</td></tr>";
+
+            while($row = $result-> fetch_assoc())
+            {
+              $aid = $row['sid'];
+              echo "<tr><td>".$row['sid']."</td><td>".$row['id']."</td><td>".$row['name']."</td><td>".daily($aid)."</td><td>".monthly($aid)."</td><td>".semester($aid)."</td><td>";
+              echo "<form action='editstudent.php' method='post'>";
+              echo "<input type='hidden' name='edit' value='$aid'>";
+              echo "<input type='submit' class='actionButton editButton' value=''></form></td><td>";
+              echo "<form action='removestudent.php' method='post'>";
+              echo "<input type='hidden' name='delete' value='$aid'>";
+              echo "<input type='submit' class='actionButton removeButton' value=''></form></td></tr>";
+            }
+            echo "</table></div>";
+          }
+        }
       }
 
       $sql = "SHOW TABLES FROM ".$database;
