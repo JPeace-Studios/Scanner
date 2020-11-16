@@ -42,7 +42,7 @@ if (!isset($_SESSION['logged']))
       $sql = "SELECT * FROM students";
       if ($result = @$connect-> query($sql))
       {
-        echo "<table class='nicelook'>";
+        echo "<button id='panelButton' onclick='buttonclick(-1);'>Show/Hide students table</button><div id='-1' class='hideOff' style='margin-bottom: 5px'><table class='nicelook'>";
         echo "<tr><td>No.</td><td>ID</td><td>Name</td><td>Daily attendance</td><td>Monthly attendance</td><td>Semester attendance</td></tr>";
 
         while($row = $result-> fetch_assoc())
@@ -56,7 +56,7 @@ if (!isset($_SESSION['logged']))
           echo "<input type='hidden' name='delete' value='$aid'>";
           echo "<input type='submit' class='actionButton removeButton' value=''></form></td></tr>";
         }
-        echo "</table>";
+        echo "</table></div>";
       }
 
       $sql = "SHOW TABLES FROM ".$database;
@@ -76,6 +76,7 @@ if (!isset($_SESSION['logged']))
         $sql = "SELECT * FROM ".$lessons[$i];
         if ($result = @$connect-> query($sql))
         {
+          echo "<button id='panelButton' onclick='buttonclick($i);'>Lesson on ".date('d/m/Y H:i', substr($lessons[$i], 6))."</button><div id='$i' class='hideOn'>";
           echo "<table class='nicelook2' style='text-align: center; padding: 30px'>";
           echo "<tr><th colspan='3'>".date('d/m/Y H:i', substr($lessons[$i], 6))."</th></tr>";
           echo "<tr><td colspan='3' class='lessonButtonCell'>";
@@ -121,10 +122,23 @@ if (!isset($_SESSION['logged']))
               }
             }
           }
+          echo "</table></div>";
         }
       }
     }
     ?>
+    <script type="text/javascript">
+      function buttonclick(a)
+      {
+        var shade = document.getElementById(a);
+        if (shade.className == "hideOn")
+        {
+          shade.className = "hideOff";
+        } else {
+          shade.className = "hideOn";
+        }
+      }
+    </script>
   </div>
 </body>
 </html>

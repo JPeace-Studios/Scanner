@@ -124,7 +124,7 @@ label {
 
 .nicelook2
 {
-  margin-top: 25px;
+  margin-top: 10px;
   border: 2px solid black;
   text-align: center;
   padding: 5px;
@@ -138,6 +138,16 @@ label {
   width: auto;
   display: flex;
   justify-content: center;
+}
+
+.hideOn {
+  margin: 0 auto;
+  display: none;
+}
+
+.hideOff {
+  margin: 0 auto;
+  display: block;
 }
 
 #panelButton {
