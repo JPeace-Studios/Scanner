@@ -23,10 +23,10 @@ if (!isset($_SESSION['logged']))
     <form id="loginBox" method="post" action="addstudent.php">
       Add new student<br>
       <label>Name:</label>
-      <input id="nameInput" class="normalInput" name="name" oninput="lockButton()"><br>
+      <input id="nameInput" class="normalInput" name="name" oninput="lockButton('name', 'id')"><br>
       <label>ID:</label>
-      <input type="number" id="idInput" class="normalInput" name="id" oninput="lockButton()"><br>
-      <input id="submitButton" type="submit" value="Add new student">
+      <input type="number" id="idInput" class="normalInput" name="id" oninput="lockButton('name', 'id')"><br>
+      <input id="submitButton" type="submit" disabled value="Add new student">
       <?php
       if(isset($_SESSION['idTaken']))
       {
@@ -36,23 +36,7 @@ if (!isset($_SESSION['logged']))
       ?>
     </form>
   </div>
-  <script type="text/javascript">
-  function lockButton()
-  {
-    var nameValue = document.forms["loginBox"]["nameInput"].value;
-    var idValue = document.forms["loginBox"]["idInput"].value;
-    if (nameValue == null || nameValue == "" || idValue == null || idValue == "")
-    {
-      document.getElementById("submitButton").disabled = true;
-      document.getElementById("submitButton").style.cursor = 'not-allowed';
-    }
-    else
-    {
-      document.getElementById("submitButton").disabled = false;
-      document.getElementById("submitButton").style.cursor = 'pointer';
-    }
-  }
-  lockButton();
+  <script src="lockbutton.js" type="text/javascript">
   </script>
 </body>
 </html>

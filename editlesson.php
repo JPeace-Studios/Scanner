@@ -69,12 +69,12 @@ else
       Change lesson time<br>
       <?php
       echo "<label>Set date: </label>";
-      echo "<input type='date' id='ldate' class='normalInput' name='ldate' oninput='lockButton()' value='".date('Y-m-d', substr($toedit, 6))."'><br>";
+      echo "<input type='date' id='ldate' class='normalInput' name='ldate' oninput='lockButton(\"ldate\", \"ltime\")' value='".date('Y-m-d', substr($toedit, 6))."'><br>";
       echo "<label>Set time: </label>";
-      echo "<input type='time' id='ltime' class='normalInput' name='ltime' oninput='lockButton()' value='".date('H:i', substr($toedit, 6))."'><br>";
+      echo "<input type='time' id='ltime' class='normalInput' name='ltime' oninput='lockButton(\"ldate\", \"ltime\")' value='".date('H:i', substr($toedit, 6))."'><br>";
       echo "<input type='hidden' name='lessonID' value='$toedit'>";
-      echo "<input type='submit' id='submitButton' value='Save changes'>";
-      
+      echo "<input type='submit' id='submitButton' disabled value='Save changes'>";
+
       if(isset($_SESSION['lessonTaken']))
       {
         echo '<div style="margin-top: 20px; padding: 20px 0 20px 0; border: 1px solid red; border-radius: 5px; background-color: #ffb3b3">There is already lesson at this time</div>';
@@ -92,7 +92,7 @@ else
         while ($row = mysqli_fetch_assoc($result))
         {
           echo "<tr><td>".$row['sid']."</td><td>";
-          echo "<select id='".$row['sid']."' onchange='changestatus(".$row['sid'].")'>";
+          echo "<select id='".$row['sid']."' class='statusSelect' onchange='changestatus(".$row['sid'].")'>";
           if ($row['status'] == 0)
           {
             echo "<option value='absent' selected>absent</option>";
@@ -118,46 +118,9 @@ else
       ?>
     </form>
   </div>
-  <script type="text/javascript">
-  function lockButton()
-  {
-    var dateValue = document.forms["loginBox"]["ldate"].value;
-    var timeValue = document.forms["loginBox"]["ltime"].value;
-    if (dateValue == null || dateValue == "" || timeValue == null || timeValue == "")
-    {
-      document.getElementById("submitButton").disabled = true;
-      document.getElementById("submitButton").style.cursor = 'not-allowed';
-    }
-    else
-    {
-      document.getElementById("submitButton").disabled = false;
-      document.getElementById("submitButton").style.cursor = 'pointer';
-    }
-  }
-  function changestatus(sid)
-  {
-    var ldate = document.getElementById("ldate").value;
-    var ltime = document.getElementById("ltime").value;
-    var changed = document.getElementById(sid).value;
-    //document.getElementById("loginBox").innerHTML = "You selected: " + changed;
-    if (changed == "absent")
-    {
-      changed = 0;
-    }
-    else if (changed == "present")
-    {
-      changed = 1;
-    }
-    else if (changed == "late")
-    {
-      changed = 2;
-    }
-    document.cookie = "ldate=" + ldate;
-    document.cookie = "ltime=" + ltime;
-    document.cookie = "changestatus=" +  sid + "," + changed;
-    window.location.href = "editlesson.php";
-  }
-  lockButton();
+  <script src="lockbutton.js" type="text/javascript">
+  </script>
+  <script src="changestatus.js" type="text/javascript">
   </script>
 </body>
 </html>

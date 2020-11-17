@@ -52,7 +52,7 @@ if (!isset($_SESSION['logged']))
           $sql = "SELECT * FROM students";
           if ($result = @$connect-> query($sql))
           {
-            echo "<button id='panelButton' onclick='buttonclick(-1);'>Show/Hide students table</button><div id='-1' class='hideOff' style='margin-bottom: 5px'><table class='nicelook'>";
+            echo "<button id='showHideButton' onclick='buttonclick(-1, \"showHideButton\");'>Hide students table</button><div id='-1' class='hideOff' style='margin-bottom: 5px'><table class='nicelook'>";
             echo "<tr><td>No.</td><td>ID</td><td>Name</td><td>Daily attendance</td><td>Monthly attendance</td><td>Semester attendance</td></tr>";
 
             while($row = $result-> fetch_assoc())
@@ -139,17 +139,7 @@ if (!isset($_SESSION['logged']))
       }
     }
     ?>
-    <script type="text/javascript">
-      function buttonclick(a)
-      {
-        var shade = document.getElementById(a);
-        if (shade.className == "hideOn")
-        {
-          shade.className = "hideOff";
-        } else {
-          shade.className = "hideOn";
-        }
-      }
+    <script src="showhide.js" type="text/javascript">
     </script>
   </div>
 </body>

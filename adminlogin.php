@@ -23,18 +23,16 @@ if ((isset($_SESSION['logged'])) && ($_SESSION['logged']==true))
     <form id="loginBox" method="post" action="login.php">
       Log in to adminstrator panel<br>
       <label for="login">Login:</label><br>
-      <input type="text" id="login" class="normalInput" name="login" oninput="lockButton()"><br>
+      <input type="text" id="login" class="normalInput" name="login" oninput="lockButton('login', 'password')"><br>
       <label for="password">Password:</label><br>
-      <input type="password" id="password" class="normalInput" name="password" oninput="lockButton()"><br>
-      <input type="submit" id="submitButton" value="Log In">
+      <input type="password" id="password" class="normalInput" name="password" oninput="lockButton('login', 'password')"><br>
+      <input type="submit" id="submitButton" disabled value="Log In">
       <?php
       if(isset($_SESSION['loginError']))
       {
         echo '<div style="margin-top: 20px; padding: 20px 0 20px 0; border: 1px solid red; border-radius: 5px; background-color: #ffb3b3">Incorrect login or password</div>';
         ?>
-        <script type="text/javascript">
-          document.body.style.backgroundImage = "linear-gradient(to bottom right, #4ddbff 20%, #ff2020 90%)";
-          document.getElementById("adminbutton").style.borderColor = "#ff2020"
+        <script src="logingradient.js" type="text/javascript">
         </script>
         <?php
       }
@@ -42,23 +40,7 @@ if ((isset($_SESSION['logged'])) && ($_SESSION['logged']==true))
       ?>
     </form>
   </div>
-  <script type="text/javascript">
-  function lockButton()
-  {
-    var loginValue = document.forms["loginBox"]["login"].value;
-    var passwordValue = document.forms["loginBox"]["password"].value;
-    if (loginValue == null || loginValue == "" || passwordValue == null || passwordValue == "")
-    {
-      document.getElementById("submitButton").disabled = true;
-      document.getElementById("submitButton").style.cursor = 'not-allowed';
-    }
-    else
-    {
-      document.getElementById("submitButton").disabled = false;
-      document.getElementById("submitButton").style.cursor = 'pointer';
-    }
-  }
-  lockButton();
+  <script src="lockbutton.js" type="text/javascript">
   </script>
 </body>
 </html>

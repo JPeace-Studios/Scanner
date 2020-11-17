@@ -46,13 +46,13 @@ if ($connect->connect_errno!=0)
       $result = mysqli_query($connect, $sql);
       $row = mysqli_fetch_assoc($result);
       $name = $row['name'];
-      echo "<input id='nameInput' class='normalInput' name='name' value='$name' oninput='lockButton()''>";
+      echo "<input id='nameInput' class='normalInput' name='name' value='$name' oninput='lockButton(\"name\", \"id\")'>";
       $sql = "SELECT id FROM students WHERE sid='$toedit'";
       $result = mysqli_query($connect, $sql);
       $row = mysqli_fetch_assoc($result);
       $id = $row['id'];
       echo "<br><label>ID:</label>";
-      echo "<input type='number' id='idInput' class='normalInput' name='id' value='$id' oninput='lockButton()'><br>";
+      echo "<input type='number' id='idInput' class='normalInput' name='id' value='$id' oninput='lockButton(\"name\", \"id\")'><br>";
       ?>
       <input id="submitButton" type="submit" value="Save changes">
       <?php
@@ -64,23 +64,7 @@ if ($connect->connect_errno!=0)
       ?>
     </form>
   </div>
-  <script type="text/javascript">
-  function lockButton()
-  {
-    var nameValue = document.forms["loginBox"]["nameInput"].value;
-    var idValue = document.forms["loginBox"]["idInput"].value;
-    if (nameValue == null || nameValue == "" || idValue == null || idValue == "")
-    {
-      document.getElementById("submitButton").disabled = true;
-      document.getElementById("submitButton").style.cursor = 'not-allowed';
-    }
-    else
-    {
-      document.getElementById("submitButton").disabled = false;
-      document.getElementById("submitButton").style.cursor = 'pointer';
-    }
-  }
-  lockButton();
+  <script src="lockbutton.js" type="text/javascript">
   </script>
 </body>
 </html>
