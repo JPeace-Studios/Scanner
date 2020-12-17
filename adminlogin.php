@@ -17,20 +17,15 @@ if ((isset($_SESSION['logged'])) && ($_SESSION['logged']==true))
 </head>
 <body>
   <div id="buttonWrapper">
-  <button id="adminbutton" type="button" onclick="location.replace('index.php')">Go back</button>
+  <a href="index.php" id="headerLogo">Scanner</a>
   </div>
   <div id="loginWrapper">
     <form id="loginBox" method="post" action="login.php">
-      Log in to adminstrator panel<br>
-      <label for="login">Login:</label><br>
-      <input type="text" id="login" class="normalInput" name="login" oninput="lockButton('login', 'password')"><br>
-      <label for="password">Password:</label><br>
-      <input type="password" id="password" class="normalInput" name="password" oninput="lockButton('login', 'password')"><br>
-      <input type="submit" id="submitButton" disabled value="Log In">
+      Adminstrator panel
       <?php
       if(isset($_SESSION['loginError']))
       {
-        echo '<div style="margin-top: 20px; padding: 20px 0 20px 0; border: 1px solid red; border-radius: 5px; background-color: #ffb3b3">Incorrect login or password</div>';
+        echo '<div class="errorMessage"><div class="errorIcon"></div>Incorrect login or password</div>';
         ?>
         <script src="logingradient.js" type="text/javascript">
         </script>
@@ -38,6 +33,23 @@ if ((isset($_SESSION['logged'])) && ($_SESSION['logged']==true))
       }
       unset($_SESSION['loginError']);
       ?>
+      <div class="inputSection">
+      <input type="text" id="login" name="login" oninput="lockButton('login', 'password')" required>
+      <label for="login" class="labelName">
+        <span class="labelText">Login</span>
+      </label>
+      </div>
+      <div class="inputSection">
+      <input type="password" id="password" name="password" oninput="lockButton('login', 'password')" required>
+      <label for="password" class="labelName">
+        <span class="labelText">Password</span>
+      </label>
+      </div>
+      <div>
+      <input type="submit" id="submitButton" disabled value="Log In">
+      <input type="button" id="submitButton" value="Cancel" onclick="window.history.back();">
+      </div>
+
     </form>
   </div>
   <script src="lockbutton.js" type="text/javascript">

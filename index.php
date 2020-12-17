@@ -5,6 +5,7 @@
 <title>Scanner - Home</title>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@600&display=swap" rel="stylesheet">
 <?php
 require_once "connect.php";
 require_once "activelesson.php";
@@ -63,7 +64,8 @@ if ($connect->connect_errno!=0)
   }
   ?>
 <div id="buttonWrapper">
-<button id="adminbutton" type="button" onclick="location.replace('adminlogin.php')">Admin panel</button>
+<a href="index.php" id="headerLogo">Scanner</a>
+<a href="adminpanel.php" id="adminbutton" class="topButton"></a>
 </div>
 <div id ="please">Put your card</div>
 <img src="card.png" id="cardlogo">

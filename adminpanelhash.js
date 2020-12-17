@@ -1,16 +1,13 @@
-function changeContent(toShowId, redirect=0)
+function hashRedirect()
 {
-  if (redirect != 0) {
-    window.location.href = "adminpanel.php#" + toShowId;
-  }
-  else {
+  if (window.location.hash) {
     var toHide = document.getElementsByClassName("hideOff");
     var i;
     for (i = 0; i < toHide.length; i++)
     {
       toHide[i].className = "hideOn";
     }
-    var toShow = document.getElementById(toShowId);
+    var toShow = document.getElementById(window.location.hash.substring(1));
     toShow.className = "hideOff";
   }
 }

@@ -5,6 +5,15 @@ if (!isset($_SESSION['logged']))
   header('Location: adminlogin.php');
   exit();
 }
+
+require_once "connect.php";
+
+$connect = @new mysqli($host, $userDB, $passwordDB, $database);
+
+if ($connect->connect_errno!=0)
+{
+  echo "Error: ".$connect->connect_errno;
+}
 ?>
 
 <!DOCTYPE html>
@@ -14,27 +23,155 @@ if (!isset($_SESSION['logged']))
 <title>Scanner - Add lesson</title>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+<script src="showhide.js" type="text/javascript"></script>
 </head>
 <body>
   <div id="buttonWrapper">
-  <button id="adminbutton" type="button" onclick="location.replace('adminpanel.php')">Go back</button>
+  <a href="index.php" id="headerLogo">Scanner</a>
+  <a href="logout.php" id ="logOutbutton" class="topButton"></a>
   </div>
-  <div id="loginWrapper">
+  <div>
+    <div id="sidePanel">
+    <div class="sideButtons">
+    <a id="studentsBtn" onclick="changeContent('studentsTable', 1);">
+    <div id="studentsPic" class="sidePic"></div>
+    Students
+    </a>
+    <a id="studentsAddBtn" href="addingstudent.php">
+    <div id="studentsAddBtnPic"></div>
+    </a>
+    </div>
+    <div class="btnBorder"></div>
+    <a class="sideButtons lessonsBtn" href="addinglesson.php">
+    <div id="lessonAddPic" class="sidePic"></div>
+    Add new lesson
+    </a>
+    <?php
+    $nowStamp = time();
+    $beginOfToday = strtotime("today", $nowStamp);
+    $beginOfTomorrow = $beginOfToday + 86400;
+    $endOfTomorrow = $beginOfTomorrow + 86399;
+    $sql = "SHOW TABLES FROM ".$database;
+    $result = @$connect-> query($sql);
+    $lessons = array();
+    while ($row = mysqli_fetch_row($result))
+    {
+      if (strspn($row[0],"lesson") == 6)
+      {
+        array_push($lessons, substr($row[0], 6));
+      }
+    }
+    for ($i = 0; $i < count($lessons); $i++)
+    {
+      if ($lessons[$i] < $beginOfToday)
+      {
+        if (!isset($finishedLessons))
+        {
+          $finishedLessons = array();
+        }
+        array_push($finishedLessons, $lessons[$i]);
+      }
+      elseif ($lessons[$i] >= $beginOfToday && $lessons[$i] < $beginOfTomorrow)
+      {
+        if (!isset($todayLessons))
+        {
+          $todayLessons = array();
+        }
+        array_push($todayLessons, $lessons[$i]);
+      }
+      elseif ($lessons[$i] >= $beginOfTomorrow && $lessons[$i] < $endOfTomorrow)
+      {
+        if (!isset($tomorrowLessons))
+        {
+          $tomorrowLessons = array();
+        }
+        array_push($tomorrowLessons, $lessons[$i]);
+      }
+      elseif ($lessons[$i] > $endOfTomorrow)
+      {
+        if (!isset($furtherLessons))
+        {
+          $furtherLessons = array();
+        }
+        array_push($furtherLessons, $lessons[$i]);
+      }
+    }
+    if (isset($todayLessons))
+    {
+      echo '<div class="lessongroup">Today</div>';
+      for ($j=0; $j < count($todayLessons); $j++)
+      {
+        echo '<a class="sideButtons lessonsBtn" onclick="changeContent(\'table'.$todayLessons[$j].'\', 1)">'.date("H:i",$todayLessons[$j]).'</a>';
+      }
+    }
+    if (isset($tomorrowLessons))
+    {
+      echo '<div class="lessongroup">Tomorrow</div>';
+      for ($j=0; $j < count($tomorrowLessons); $j++)
+      {
+        echo '<a class="sideButtons lessonsBtn" onclick="changeContent(\'table'.$tomorrowLessons[$j].'\', 1)">'.date("H:i",$tomorrowLessons[$j]).'</a>';
+      }
+    }
+    if (isset($finishedLessons))
+    {
+      echo '<div class="lessongroup">Finished</div>';
+      $newFinishedLessons = array();
+      for ($j= count($finishedLessons) -1; $j >= 0; $j--)
+      {
+        if ($finishedLessons[$j] < strtotime("today",end($newFinishedLessons)) || $finishedLessons[$j] > strtotime("today",(end($newFinishedLessons) + 86400)) || empty($newFinishedLessons))
+        {
+          echo '<div class="lessondate">'.date("j F", $finishedLessons[$j]);
+          if (date("Y", $nowStamp) != date("Y",$finishedLessons[$j]))
+          {
+            echo " ".date("Y", $finishedLessons[$j]);
+          }
+          echo '</div>';
+        }
+        array_push($newFinishedLessons, $finishedLessons[$j]);
+        echo '<a class="sideButtons lessonsBtn" onclick="changeContent(\'table'.$finishedLessons[$j].'\', 1)">'.date("H:i",$finishedLessons[$j]).'</a>';
+      }
+    }
+    if (isset($furtherLessons))
+    {
+      echo '<div class="lessongroup">Further</div>';
+      $newFurtherLessons = array();
+      for ($j=0; $j < count($furtherLessons); $j++)
+      {
+        if ($furtherLessons[$j] < strtotime("today",end($newFurtherLessons)) || $furtherLessons[$j] > strtotime("today",(end($newFurtherLessons) + 86400)) || empty($newFurtherLessons))
+        {
+          echo '<div class="lessondate">'.date("j F", $furtherLessons[$j]);
+          if (date("Y", $nowStamp) != date("Y",$furtherLessons[$j]))
+          {
+            echo " ".date("Y", $furtherLessons[$j]);
+          }
+          echo '</div>';
+        }
+        array_push($newFurtherLessons, $furtherLessons[$j]);
+        echo '<a class="sideButtons lessonsBtn" onclick="changeContent(\'table'.$furtherLessons[$j].'\', 1)">'.date("H:i",$furtherLessons[$j]).'</a>';
+      }
+    }
+    ?>
+  </div>
+  <div id="contentBox">
     <form id="loginBox" method="post" action="addLesson.php">
       Add new lesson<br>
-      <label>Set date:</label>
-      <input type="date" id="ldate" class="normalInput" name="ldate" oninput="lockButton('ldate', 'ltime');"><br>
-      <label>Set time:</label>
-      <input type="time" id="ltime" class="normalInput" name="ltime" oninput="lockButton('ldate', 'ltime');"><br>
-      <input type="submit" id="submitButton" disabled value="Add new lesson">
       <?php
       if(isset($_SESSION['lessonTaken']))
       {
-        echo '<div style="margin-top: 20px; padding: 20px 0 20px 0; border: 1px solid red; border-radius: 5px; background-color: #ffb3b3">There is already lesson at this time</div>';
+        echo '<div class="errorMessage"><div class="errorIcon"></div>There is already lesson at this time</div>';
       }
       unset($_SESSION['lessonTaken']);
       ?>
+      <label class="labelMargin">Set date:</label>
+      <input type="date" id="ldate" class="normalInput" name="ldate" oninput="lockButton('ldate', 'ltime');"><br>
+      <label class="labelMargin">Set time:</label>
+      <input type="time" id="ltime" class="normalInput" name="ltime" oninput="lockButton('ldate', 'ltime');"><br>
+      <table>
+      <tr><td><input id="submitButton" type="submit" disabled value="Add new lesson"></td>
+      <td><input id="submitButton" type="button" onclick="location.href = 'adminpanel.php';" value="Cancel"></td></tr>
+      </table>
     </form>
+  </div>
   </div>
   <script src="lockbutton.js" type="text/javascript">
   </script>

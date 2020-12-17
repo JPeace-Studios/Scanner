@@ -1,4 +1,5 @@
 body {
+  margin: 0;
   background-image: linear-gradient(to bottom right, #70db70 20%, #0066ff 90%);
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -8,27 +9,55 @@ body {
 
 #buttonWrapper {
   width: 100%;
-  height: 50px;
+  height: 65px;
+  background-color: black;
+}
+
+#headerLogo {
+  display: inline-block;
+  padding: 6px 0 0 65px;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(to bottom right, #70db70 50%, #0066ff 90%);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  cursor: pointer;
+  user-select: none;
+}
+
+a#headerLogo {
+  text-decoration: none;
+}
+
+.topButton {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  margin: 20px 30px 0 0;
+  float: right;
+  transition-duration: 0.6s;
+  background: white;
+}
+
+.topButton:hover {
+  background-color: #70db70;
 }
 
 #adminbutton {
-  margin: 10px 10px 0 0;
-  float: right;
-  background: none;
-  border: 2px solid #70db70;
-  border-radius: 4px;
-  transition-duration: 0.6s;
+    mask: url("settings.svg");
+    mask-repeat: no-repeat;
 }
 
-#adminbutton:hover {
-  background: #70db70;
-  cursor: pointer;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+#logOutbutton {
+  mask: url("log-out.svg");
+  mask-repeat: no-repeat;
 }
 
 #please {
   margin-top: 8%;
   text-align: center;
+  font-family: 'Overpass', sans-serif;
   font-size: 600%;
 }
 
@@ -50,20 +79,50 @@ body {
   place-items: center;
 }
 
-#loginBox {
-  padding: 40px 50px 20px 50px;
-  text-align: center;
-  border: 2px solid black;
-  border-radius: 10px;
-  background-color: white;
+#contentBox {
+  display: inline-block;
+  width: calc(85% - 80px);
+  margin: 20px;
 }
 
-#statusBox
-{
+#loginBox {
+  display: grid;
+  place-items: center;
+  padding: 40px 50px 20px 50px;
+  text-align: center;
+  background-color: white;
+  box-shadow: 1px 1px 10px;
+  border-radius: 10px;
+}
+
+.labelMargin {
+  margin-top: 30px;
+}
+
+.errorMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 20px 10px 20px 10px;
+  border: 2px solid red;
+  border-radius: 5px;
+}
+
+.errorIcon {
+  width: 30px;
+  height: 30px;
+  mask: url("alert-triangle.svg");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  background-color: red;
+}
+
+#statusBox {
   margin-top: 50px;
   padding: 40px 50px 20px 50px;
   text-align: center;
-  border: 2px solid black;
+  box-shadow: 1px 1px 10px;
   border-radius: 10px;
   background-color: white;
 }
@@ -81,7 +140,94 @@ body {
   background: white;
 }
 
+/* custom inputs */
+
+.inputSection {
+  position: relative;
+  width: 10rem;
+  height: 50px;
+  margin: 20px 15px 15px 15px;
+  padding-top: 10px;
+  overflow: hidden;
+}
+
+.inputSection input {
+  width: 100%;
+  height: 100%;
+  color: #595f6e;
+  border: none;
+  padding-top: 10px;
+  outline: none;
+}
+
+.inputSection label {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0px;
+  left: 0%;
+  pointer-events: none;
+  border-bottom: 1px solid black;
+}
+
+.inputSection label::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0%;
+  bottom: -1px;
+  border-bottom: 3px solid #0066ff;
+  transform: translateX(-100%);
+  transition: transform 0.3 ease;
+}
+
+.labelText {
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    transition: all 0.3s ease;
+}
+
+.inputSection input:focus + .labelName .labelText,
+.inputSection input:valid + .labelName .labelText {
+  transform: translateY(-150%);
+  font-size: 14px;
+  color: #0066ff;
+}
+
+.inputSection input:focus + .labelName::after, .inputSection input:valid + .labelName::after {
+  transform: translateX(0%);
+  transition: transform 0.3s ease;
+}
+
 #submitButton {
+  height: 30px;
+  width: auto;
+  background: none;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-top: 30px;
+  background-color: black;
+  color: white;
+  transition: 0.3s;
+}
+
+#submitButton:hover:enabled {
+  background: #70db70;
+  border: 2px solid #70db70;
+  color: black;
+  cursor: pointer;
+  user-select: none;
+}
+
+#submitButton:disabled {
+  border: 2px solid grey;
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+#cancelButton {
   height: 30px;
   width: auto;
   background: none;
@@ -90,20 +236,11 @@ body {
   background-image: linear-gradient(to bottom right, #2b93c8 20%, #2087d6 90%);
 }
 
-#submitButton:hover {
+#cancelButton:hover {
   background: #70db70;
   border: 2px solid #70db70;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
-
-#submitButton:disabled {
-  color: black;
-  cursor: not-allowed;
-}
-
-label {
-  display: inline-block;
-  margin-top: 20px;
+  cursor: pointer;
+  user-select: none;
 }
 
 #idInput {
@@ -113,40 +250,184 @@ label {
 
 /* admin panel */
 
-.nicelook
-{
-  margin-top: 15px;
-  border: 2px solid black;
-  text-align: center;
-  width: 450px;
-  border-radius: 10px;
-  background-color: white;
+#sidePanel {
+  width: 15%;
+  height: 100%;
+  min-height: calc(100vh - 65px);
+  padding: 0 20px 0 20px;
+  float: left;
+  background-color: black;
 }
 
-.nicelook td, .nicelook2 td, .nicelook3 td
+.sideButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  color: white;
+}
+
+.sideButtons:first-child {
+  margin-top: 25px;
+}
+
+a#studentsBtn, a.lessonsBtn {
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+}
+
+.btnBorder {
+  margin: 15px 0 15px 0;
+  height: 0;
+  border-top: 1px solid grey;
+}
+
+#studentsBtn {
+  width: calc(100% - 50px);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+#studentsBtn:hover {
+  background-color: #70db70;
+  cursor: pointer;
+}
+
+.sidePic {
+  width: 50px;
+  height: 100%;
+  background: white;
+}
+
+#studentsPic {
+  mask: url("users.svg");
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+#lessonAddPic {
+  mask: url("plus-square.svg");
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+#studentsAddBtn {
+  width: 50px;
+  height: 100%;
+  float: right;
+  transition: 0.3s;
+}
+
+.lessonsBtn:not(:first-of-type) {
+  margin-top: 10px;
+}
+
+#studentsAddBtn:hover, .lessonsBtn:hover {
+  background-color: #70db70;
+  cursor: pointer;
+  user-select: none;
+}
+
+#studentsAddBtnPic {
+  width: 100%;
+  height: 100%;
+  mask: url("user-plus.svg");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  background: white;
+}
+
+.lessongroup {
+  margin-top: 20px;
+  color: #70db70;
+  text-align: center;
+}
+
+.lessondate {
+  margin-top: 15px;
+  color: #868686;
+}
+
+#contentWrapper {
+  display: grid;
+  place-items: center;
+}
+
+#studentsTable
 {
+  width: calc(100% - 40px);
+  margin: 0 20px 0 20px;
+}
+
+#studentsTableReal
+{
+  width: 100%;
+}
+
+.studentsActionForms
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tablestyle {
+  text-align: center;
+  border-radius: 10px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.tablestyle thead tr {
+  background-color: black;
+  color: white;
+}
+
+.tablestyle td {
   padding: 10px;
 }
 
-.nicelook th, .nicelook2 th, .nicelook3 th
-{
+.tablestyle th {
   font-weight: normal;
+  height: 40px;
 }
 
-.nicelook2
+.tablestyle1 {
+  margin-top: 15px;
+  box-shadow: 1px 1px 10px;
+}
+
+.tablestyle1 tr:nth-child(even)
 {
-  margin-top: 10px;
-  border: 2px solid black;
-  text-align: center;
+  background-color: #e7e7e7;
+}
+
+.tablestyle2 {
+  margin: 10px 20px 0 20px;
   padding: 5px;
-  width: auto;
-  border-radius: 10px;
-  background-color: white;
+  width: calc(100% - 40px);
+  box-shadow: 1px 1px 10px;
 }
 
-.nicelook3
+.tablestyle2 tr:nth-child(3)
 {
-  text-align: center;
+  background-color: black;
+  color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  overflow: hidden;
+}
+
+.tablestyle2 tr:nth-child(2n+5)
+{
+  background-color: #e7e7e7;
+}
+
+.tablestyle3 {
   padding: 5px;
   width: auto;
   display: flex;
@@ -163,8 +444,7 @@ label {
   display: block;
 }
 
-#nostudents
-{
+#nostudents {
   margin: 25px 0 25px 0;
   font-size: 1.5rem;
 }
@@ -181,6 +461,7 @@ label {
   background: #70db70;
   border: 2px solid #70db70;
   cursor: pointer;
+  user-select: none;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
@@ -196,11 +477,11 @@ label {
   background: #70db70;
   border: 2px solid #70db70;
   cursor: pointer;
+  user-select: none;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-.actionButton
-{
+.actionButton {
   width: auto;
   height: auto;
   float: left;
@@ -210,41 +491,35 @@ label {
   background-repeat: no-repeat;
 }
 
-.actionButton:hover
-{
-cursor: pointer;
+.actionButton:hover {
+  cursor: pointer;
+  user-select: none;
 }
 
-.lessonButtonCell
-{
+.lessonButtonCell {
   display: table-cell;
 }
 
-.editButton
-{
+.editButton {
   background-image: url('edit.svg');
 }
 
-.removeButton
-{
-background-image: url("remove.svg");
+.removeButton {
+  background-image: url("remove.svg");
 }
 
-.editButtonLesson
-{
+.editButtonLesson {
 padding-left: 20%;
 }
 
-.removeButtonLesson
-{
+.removeButtonLesson {
 float: right;
 padding-right: 20%;
 }
 
 /* edit lesson */
 
-.statusSelect
-{
+.statusSelect {
   line-height: 1.3;
   padding: .6em 2em .5em .8em;
   text-align: center;
@@ -259,9 +534,9 @@ padding-right: 20%;
   background-size: .75em auto, 100%;
 }
 
-.statusSelect:hover
-{
+.statusSelect:hover {
   cursor: pointer;
+  user-select: none;
 }
 
 /* remove arrows from number input field */
