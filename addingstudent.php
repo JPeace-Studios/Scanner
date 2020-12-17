@@ -33,7 +33,7 @@ if ($connect->connect_errno!=0)
   <div>
     <div id="sidePanel">
     <div class="sideButtons">
-    <a id="studentsBtn" onclick="changeContent('studentsTable');">
+    <a id="studentsBtn" onclick="changeContent('studentsTable', 1);">
     <div id="studentsPic" class="sidePic"></div>
     Students
     </a>
